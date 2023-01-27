@@ -1,4 +1,4 @@
-import { Button, Checkbox, DatePicker, Form, Input } from 'antd';
+import { Button, Checkbox, DatePicker, Form, Input, InputNumber } from 'antd';
 import dayjs from 'dayjs';
 
 const formItemLayout = {
@@ -52,9 +52,9 @@ const MyForm = () => {
         >
             <Form.Item
                 name="FirstName"
-                label="First Name"
+                label="Ad"
                 rules={[
-                    { required: true, message: 'Please input your First Name!' },
+                    { required: true, message: 'Lütfen Adınızı Giriniz!' },
                 ]}
             >
                 <Input allowClear />
@@ -62,20 +62,20 @@ const MyForm = () => {
 
             <Form.Item
                 name="LastName"
-                label="Last Name"
+                label="Soyad"
                 rules={[
-                    { required: true, message: 'Please input your Last Name!' },
+                    { required: true, message: 'Lütfen Soyadınızı Giriniz!' },
                 ]}
             >
                 <Input allowClear />
             </Form.Item>
 
             <Form.Item
-                name="TC"
+                name="IDNumber"
                 label="TC Kimlik No"
                 rules={[
-                    { required: true, message: 'Please input your TC!' },
-                    { type: Number, message: 'Field must be number!'}
+                    { required: true, message: 'Lütfen Türkiye Cumhuriyeti Kimlik Numaranızı Giriniz!' },
+                    { type: Number, message: 'Bu Alana Sadece Sayı Girebilirsiniz!'}
                 ]}
                 hasFeedback
             >
@@ -94,9 +94,9 @@ const MyForm = () => {
 
             <Form.Item
                 name="PhoneNumber"
-                label="Phone Number"
+                label="Telefon Numarası"
                 rules={[
-                    { required: true, message: 'Please input your Phone Number!' },
+                    { required: true, message: 'Lütfen Cep Telefonu Numaranızı Başında 0 olmadan giriniz!' },
                 ]}
                 hasFeedback
             >
@@ -115,19 +115,49 @@ const MyForm = () => {
 
             <Form.Item
                 name="Plate"
-                label="Plate"
+                label="Araç Plakası"
                 rules={[
-                    { required: true, message: 'Please input your Plate!' },
+                    { required: true, message: 'Lütfen Plakanızı giriniz!'},
                 ]}
             >
-                <Input allowClear />
+                <Input.Group compact>
+                    <InputNumber
+                        style={{
+                        width: '20%',
+                        }}
+                        maxLength={2}
+                        onKeyPress={(event) => {
+                            if (!/[0-9]/.test(event.key)) {
+                                event.preventDefault();
+                            }
+                        }}
+                    />
+                    <Input
+                        style={{
+                        width: '20%',
+                        }}
+                        onInput={e => e.target.value = e.target.value.toUpperCase()}
+                        maxLength={5}
+                    />
+                    <InputNumber
+                        style={{
+                        width: '20%',
+                        }} 
+                        onKeyPress={(event) => {
+                            if (!/[0-9]/.test(event.key)) {
+                                event.preventDefault();
+                            }
+                        }}
+                        maxLength={6}
+                    />
+                </Input.Group>
             </Form.Item>
 
             <Form.Item
                 name="documentNumber"
-                label="Document Number"
+                label="Ruhsat No"
                 rules={[
-                    { required: true, message: 'Please input your document number!' },
+                    { required: true, message: 'Lütfen Ruhsat No Giriniz!' },
                 ]}
             >
                 <Input allowClear />
@@ -136,14 +166,14 @@ const MyForm = () => {
 
             <Form.Item
                 name="Address"
-                label="Address"
+                label="Adres"
                 style={{
                     marginBottom: '1px',
                   }}
                 rules={[
                     {
                         required: true,
-                        message: 'Please enter your address',
+                        message: 'Lütfen Adres Giriniz',
                     },
                 ]}
             >
@@ -152,12 +182,12 @@ const MyForm = () => {
 
             <Form.Item
                 name="BirthDate" 
-                label="Birth Date"
+                label="Doğum Tarihi"
                 rules= {[
                     {
                         type: 'object',
                         required: true,
-                        message: 'Please select time!',
+                        message: 'Lütfen Doğum Tarihinizi Seçiniz!',
                     },
                 ]}
             >
@@ -174,18 +204,18 @@ const MyForm = () => {
                 rules={[
                     {
                         validator: (_, value) =>
-                            value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
+                            value ? Promise.resolve() : Promise.reject(new Error('Sözleşmeyi Kabul Etmeden İlerleyemezsiniz')),
                     },
                 ]}
                 {...tailFormItemLayout}
             >
                 <Checkbox>
-                    I have read the <a href="#/">agreement</a>
+                    Kullanıcı <a href="#/">Sözleşmesini</a> Okudum.
                 </Checkbox>
             </Form.Item>
             <Form.Item {...tailFormItemLayout}>
                 <Button type="primary" htmlType="submit">
-                    Register
+                    Kaydol
                 </Button>
             </Form.Item>
         </Form>
