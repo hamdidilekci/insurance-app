@@ -1,4 +1,4 @@
-import { Button, Checkbox, DatePicker, Form, Input, InputNumber } from 'antd';
+import { Button, Checkbox, DatePicker, Form, Input } from 'antd';
 import dayjs from 'dayjs';
 
 const formItemLayout = {
@@ -37,7 +37,7 @@ const tailFormItemLayout = {
 
 const MyForm = () => {
     const [form] = Form.useForm();
-    const onFinish = (values) => {
+    const handleSubmit = (values) => {
         console.log('Received values of form: ', values);
     };
 
@@ -45,8 +45,8 @@ const MyForm = () => {
         <Form
             {...formItemLayout}
             form={form}
-            name="register"
-            onFinish={onFinish}
+            name="complex-form"
+            onFinish={handleSubmit}
             scrollToFirstError
             className='form'
         >
@@ -75,7 +75,7 @@ const MyForm = () => {
                 label="TC Kimlik No"
                 rules={[
                     { required: true, message: 'Lütfen Türkiye Cumhuriyeti Kimlik Numaranızı Giriniz!' },
-                    { type: Number, message: 'Bu Alana Sadece Sayı Girebilirsiniz!'}
+                    { type: Number, message: 'Bu Alana Sadece Sayı Girebilirsiniz!' }
                 ]}
                 hasFeedback
             >
@@ -113,43 +113,73 @@ const MyForm = () => {
                 />
             </Form.Item>
 
-            <Form.Item
-                name="Plate"
-                label="Araç Plakası"
-                rules={[
-                    { required: true, message: 'Lütfen Plakanızı giriniz!'},
-                ]}
-            >
+            <Form.Item label='Plaka'>
                 <Input.Group compact>
-                    <InputNumber
-                        style={{
-                        width: '20%',
+                    <Form.Item
+                        name={['Plate', 'cityCode']}
+                        noStyle
+                        rules={[
+                            {
+                                required: true,
+                                message: 'cityCode is required',
+                            },
+                        ]}
+                    >
+                        <Input style={{
+                            width: '20%',
                         }}
-                        maxLength={2}
-                        onKeyPress={(event) => {
-                            if (!/[0-9]/.test(event.key)) {
-                                event.preventDefault();
-                            }
+                            maxLength={2}
+                            onKeyPress={(event) => {
+                                if (!/[0-9]/.test(event.key)) {
+                                    event.preventDefault();
+                                }
+                            }}
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        name={['Plate', 'string']}
+                        noStyle
+                        rules={[
+                            {
+                                required: true,
+                                message: 'string is required',
+                            },
+                        ]}
+                    >
+                        <Input
+                            style={{
+                                width: '20%',
+                            }}
+                            onInput={e => e.target.value = e.target.value.toUpperCase()}
+                            onKeyPress={(event) => {
+                                if (!/[a-z]/.test(event.key)) {
+                                    event.preventDefault();
+                                }
+                            }}
+                            maxLength={5}
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        name={['Plate', 'lastNumber']}
+                        noStyle
+                        rules={[
+                            {
+                                required: true,
+                                message: 'lastNumber is required',
+                            },
+                        ]}
+                    >
+                        <Input style={{
+                            width: '20%',
                         }}
-                    />
-                    <Input
-                        style={{
-                        width: '20%',
-                        }}
-                        onInput={e => e.target.value = e.target.value.toUpperCase()}
-                        maxLength={5}
-                    />
-                    <InputNumber
-                        style={{
-                        width: '20%',
-                        }} 
-                        onKeyPress={(event) => {
-                            if (!/[0-9]/.test(event.key)) {
-                                event.preventDefault();
-                            }
-                        }}
-                        maxLength={6}
-                    />
+                            onKeyPress={(event) => {
+                                if (!/[0-9]/.test(event.key)) {
+                                    event.preventDefault();
+                                }
+                            }}
+                            maxLength={6}
+                        />
+                    </Form.Item>
                 </Input.Group>
             </Form.Item>
 
@@ -169,7 +199,7 @@ const MyForm = () => {
                 label="Adres"
                 style={{
                     marginBottom: '1px',
-                  }}
+                }}
                 rules={[
                     {
                         required: true,
@@ -181,9 +211,9 @@ const MyForm = () => {
             </Form.Item>
 
             <Form.Item
-                name="BirthDate" 
+                name="BirthDate"
                 label="Doğum Tarihi"
-                rules= {[
+                rules={[
                     {
                         type: 'object',
                         required: true,
@@ -193,7 +223,7 @@ const MyForm = () => {
             >
                 <DatePicker
                     defaultValue={dayjs('01-01-2023', 'DD/MM/YY')}
-                    format={['DD/MM/YYYY', 'DD/MM/YY']} 
+                    format={['DD/MM/YYYY', 'DD/MM/YY']}
                     style={{ display: 'flex', width: '200px' }}
                 />
             </Form.Item>
