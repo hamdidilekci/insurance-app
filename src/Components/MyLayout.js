@@ -66,7 +66,6 @@ const MyLayout = () => {
                     <Content
                         style={{
                            margin: '0' 
-                           
                         }}
                     >
                         <MyForm/>
@@ -78,7 +77,7 @@ const MyLayout = () => {
                     textAlign: 'center',
                 }}
             >
-                Ant Design ©2023 Created by Ant UED
+                ©2023 Created by <a href="https://www.linkedin.com/in/dilekcihamdi/">Dilekçi</a>
             </Footer>
         </Layout>
     );
