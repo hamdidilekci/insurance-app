@@ -113,17 +113,18 @@ const MyForm = () => {
                 />
             </Form.Item>
 
-            <Form.Item label='Plaka'>
+            <Form.Item 
+                label='Plaka'
+                name="Plate"
+                rules={[
+                    { required: true, message: 'Lütfen plakanızı giriniz!' },
+                ]}
+                hasFeedback
+            >
                 <Input.Group compact>
                     <Form.Item
                         name={['Plate', 'cityCode']}
                         noStyle
-                        rules={[
-                            {
-                                required: true,
-                                message: 'cityCode is required',
-                            },
-                        ]}
                     >
                         <Input style={{
                             width: '20%',
@@ -139,12 +140,6 @@ const MyForm = () => {
                     <Form.Item
                         name={['Plate', 'string']}
                         noStyle
-                        rules={[
-                            {
-                                required: true,
-                                message: 'string is required',
-                            },
-                        ]}
                     >
                         <Input
                             style={{
@@ -162,12 +157,6 @@ const MyForm = () => {
                     <Form.Item
                         name={['Plate', 'lastNumber']}
                         noStyle
-                        rules={[
-                            {
-                                required: true,
-                                message: 'lastNumber is required',
-                            },
-                        ]}
                     >
                         <Input style={{
                             width: '20%',
