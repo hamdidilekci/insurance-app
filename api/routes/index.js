@@ -24,7 +24,8 @@ router.get('/hamdi', async(req, res) => {
     // TODO replace data object with req.body
       const data = {
         firstName: 'Hamdi',
-        lastName: 'Dilekci'
+        lastName: 'Dilekci',
+        email: 'madilekci@gmail.com'
       }
       const insuranceRequest = await InsuranceRequestService.create(data);
       res.send(insuranceRequest);

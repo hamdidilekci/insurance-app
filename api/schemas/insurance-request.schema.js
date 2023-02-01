@@ -7,15 +7,11 @@ const InsuranceRequest = new Schema({
         type: String,
         required: true,
     },
-    // email: {
-    //     type: String,
-    //     required: true,
-    //     unique: true,
-    //     validate: {
-    //         validator: v => isemail.validate(v),
-    //         message: props => `${props.value} is not a valid email address`
-    //     }
-    // },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
     createdAt: Date,
     updatedAt: Date,
 }, {
