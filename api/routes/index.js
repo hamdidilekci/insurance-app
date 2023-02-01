@@ -1,4 +1,7 @@
 import express from 'express';
+
+import InsuranceRequestService from '../services/insurance-request.service.js'
+
 const router = express.Router();
 
 /* GET home page. */
@@ -18,7 +21,13 @@ router.get('/', async(req, res) => {
 /* Sample route 2. */
 router.get('/hamdi', async(req, res) => {
   try {
-      res.send('Hello hamdi');
+    // TODO replace data object with req.body
+      const data = {
+        firstName: 'Hamdi',
+        lastName: 'Dilekci'
+      }
+      const insuranceRequest = await InsuranceRequestService.create(data);
+      res.send(insuranceRequest);
   }
   catch (error) {
     console.log(error);
