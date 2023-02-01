@@ -1,7 +1,7 @@
 .container {
   margin: auto;
   width: 80%;
-  background: none;
+  /* background: none; */
 }
 
 .header {
@@ -17,22 +17,41 @@
 }
 
 .content {
-  padding: 190px 0;
+  padding: 80px;
+  /* background-color: bisque; */
 }
 
 .footer {
   text-align: center;
 }
 
-.form {
-  float: left;
+.leftItems {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  /* background-color: cadetblue; */
 }
 
-.image {
-  background-image: url(/public/backgroundimage.jpg);
+.rigthItems {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
-  height: 500px;
-  object-fit: cover;
-  background-repeat: no-repeat;
-  margin: auto;
+  /* background-color: rgb(166, 102, 134); */
 }
+
+.agreementForm {
+  display: inline-table;
+  justify-items: center;
+  width: 80%;
+}
+
+img {
+  border-style: none;
+  width: 70px;
+  height: 50px;
+  object-fit: scale-down;
+  margin: 10px;
+  margin-top: 5px;
+  background: none;
+}
+
