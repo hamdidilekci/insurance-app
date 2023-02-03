@@ -1,10 +1,10 @@
 import './App.css';
 
+import InsuranceRequestForm from './Components/InsuranceRequestForm/InsuranceRequestForm.js'
+
 function App() {
   return (
-    <div className="container">
-      Naber
-    </div>
+    <InsuranceRequestForm></InsuranceRequestForm>
   );
 }
 
