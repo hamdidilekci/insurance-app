@@ -1,7 +1,5 @@
 import { useState } from 'react'
 
-import axios from "axios";
-
 import FormInput from './FormInput.js'
 import postRequest from '../../Helpers/post-request.js';
 
@@ -78,7 +76,6 @@ export default function MyForm() {
         plate: '',
         documentNumber: '',
     });
-    // const [isLoading, setIsLoading] = useState(false);
 
     const handleClick = async (e) => {
         e.preventDefault();
@@ -100,33 +97,32 @@ export default function MyForm() {
         setFormData(prevState => ({ ...prevState, [name]: value }));
     };
 
+    const formInputs = initialInputValues.map((row) => {
+        return (
+            <div key={row[0].id} className="row mb-4">
+                {
+                    row.map(input => {
+                        return (
+                            <div key={input.id} className="col">
+                                <div className="form-floating mb-3">
+                                    <FormInput key={input.id} onChange={handleInputChange} value={formData[input.name]} {...input} />
+                                </div>
+                            </div>
+
+                        )
+                    })
+                }
+            </div>
+        )
+    })
+
     return (
         <div className="form-container">
             <div className="card p-5">
                 <div className="card-body">
                     <form >
-                        {
-                            initialInputValues.map((row) => {
-                                return (
-                                    <div key={row[0].id} className="row mb-4">
-                                        {
-                                            row.map(input => {
-                                                return (
-                                                    <div key={input.id} className="col">
-                                                        <div className="form-floating mb-3">
-                                                            <FormInput key={input.id} onChange={handleInputChange} value={formData[input.name]} {...input} />
-                                                        </div>
-                                                    </div>
-
-                                                )
-                                            })
-                                        }
-                                    </div>
-                                )
-                            })
-                        }
-
-                    <div className="d-grid gap-2 col-9 mx-auto">
+                    { formInputs }
+                    <div className="d-grid gap-2 col-12 mx-auto">
                         <button type="button" onClick={handleClick} className="btn btn-outline-primary">En uygun sigorta teklifini al</button>
                     </div>
                     </form>
