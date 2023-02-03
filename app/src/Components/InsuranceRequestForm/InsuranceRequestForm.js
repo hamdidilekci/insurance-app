@@ -1,26 +1,34 @@
+import { useState } from 'react'
+
+import axios from "axios";
+
 import FormInput from './FormInput.js'
 
 const initialInputValues = [
     [
         {
             id: 0,
-            label: "Adınız",
+            name: "firstName",
+            label: "İsim",
             type: "text"
         },
         {
             id: 1,
-            label: "Soyadınız",
+            name: "lastName",
+            label: "Soyisim",
             type: "text"
         },
     ],
     [
         {
             id: 2,
+            name: "birthDate",
             label: "Doğum tarihi",
             type: "text"
         },
         {
             id: 3,
+            name: "idNumber",
             label: "T.C. Kimlik no",
             type: "text"
         },
@@ -28,6 +36,7 @@ const initialInputValues = [
     [
         {
             id: 4,
+            name: "phoneNumber",
             label: "Telefon numarası",
             type: "tel"
         }
@@ -35,6 +44,7 @@ const initialInputValues = [
     [
         {
             id: 5,
+            name: "address",
             label: "Adres",
             type: "text-area"
         },
@@ -42,37 +52,43 @@ const initialInputValues = [
     [
         {
             id: 6,
+            name: "plate",
             label: "Plaka",
             type: "text"
         },
         {
             id: 7,
+            name: "documentNumber",
             label: "Ruhsat belge no",
             type: "text"
         }
     ]
 ]
 
-const formInputs = initialInputValues.map((row, index) => {
-    return (
-        <div key={row[0].id} className="row mb-4">
-            {
-                row.map(input => {
-                    return (
-                        <div key={input.id} className="col">
-                            <div className="form-floating mb-3">
-                                <FormInput key={input.id} {...input} />
-                            </div>
-                        </div>
-
-                    )
-                })
-            }
-        </div>
-    )
-})
-
 export default function MyForm() {
+
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        birthDate: '',
+        idNumber: '',
+        phoneNumber: '',
+        address: '',
+        plate: '',
+        documentNumber: '',
+    });
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        console.log('button clicked');
+        console.log(formData);
+    }
+
+    const handleInputChange = (e) => {
+        const value= e.target.value;
+        const name = e.target.getAttribute('name');
+        setFormData(prevState => ({ ...prevState, [name]: value }));
+    };
 
     return (
         <div className="form-container">
@@ -80,11 +96,28 @@ export default function MyForm() {
                 <div className="card-body">
                     <form >
                         {
-                            formInputs
+                            initialInputValues.map((row) => {
+                                return (
+                                    <div key={row[0].id} className="row mb-4">
+                                        {
+                                            row.map(input => {
+                                                return (
+                                                    <div key={input.id} className="col">
+                                                        <div className="form-floating mb-3">
+                                                            <FormInput key={input.id} onChange={handleInputChange} value={formData[input.name]} {...input} />
+                                                        </div>
+                                                    </div>
+
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                )
+                            })
                         }
 
-                    <div class="d-grid gap-2 col-9 mx-auto">
-                        <button type="submit" className="btn btn-outline-primary">En uygun sigorta teklifini al</button>
+                    <div className="d-grid gap-2 col-9 mx-auto">
+                        <button type="button" onClick={handleClick} className="btn btn-outline-primary">En uygun sigorta teklifini al</button>
                     </div>
                     </form>
                 </div>

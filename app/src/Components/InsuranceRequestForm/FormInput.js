@@ -1,14 +1,24 @@
 import { useId } from 'react'
 
-export default function FormInput({ label, type }) {
+export default function FormInput({ name, label, type, value, onChange}) {
   const inputId = useId();
+
+  const inputOptions = {
+    name,
+    onChange,
+    value,
+    type,
+    placeholder: label,
+    id: inputId
+  }
+
   return (
     <>
       {
         type === 'text-area' ?
-          <textarea style={{height: "100%"}}  type={type} rows="3" className="form-control mb-2" id={inputId} placeholder={label} />
+          <textarea {...inputOptions} style={{height: "100%"}} rows="3" className="form-control mb-2" />
         :
-          <input  type={type} className="form-control mb-2" id={inputId} placeholder={label} /> 
+          <input {...inputOptions} className="form-control mb-2" /> 
       }
       {
         label && <label htmlFor={inputId}>{ label }</label>
