@@ -103,7 +103,7 @@ export default function MyForm() {
                 {
                     row.map(input => {
                         return (
-                            <div key={input.id} className="col">
+                            <div key={input.id} className="col-md-12 col-lg">
                                 <div className="form-floating mb-3">
                                     <FormInput key={input.id} onChange={handleInputChange} value={formData[input.name]} {...input} />
                                 </div>
