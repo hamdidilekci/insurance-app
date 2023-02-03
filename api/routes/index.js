@@ -7,29 +7,8 @@ const router = express.Router();
 /* GET home page. */
 router.post('/insurance-request', async(req, res) => {
   try {
-      let profiles = {
-        name: 'Hello',
-        lastName: 'World',
-        body: req.body
-      };
-      res.send(profiles);
-  }
-  catch (error) {
-    console.log(error);
-  }
-});
-
-/* Sample route 2. */
-router.get('/hamdi', async(req, res) => {
-  try {
-    // TODO replace data object with req.body
-      const data = {
-        firstName: 'Hamdi',
-        lastName: 'Dilekci',
-        email: 'madilekci@gmail.com'
-      }
-      const insuranceRequest = await InsuranceRequestService.create(data);
-      res.send(insuranceRequest);
+      const response = await InsuranceRequestService.create(req.body);
+      res.send(response);
   }
   catch (error) {
     console.log(error);

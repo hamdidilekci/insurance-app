@@ -5,12 +5,27 @@ const { Schema } = mongoose;
 const InsuranceRequest = new Schema({
     firstName: {
         type: String,
-        required: true,
     },
-    email: {
+    lastName: {
         type: String,
-        required: true,
-        unique: true,
+    },
+    birthDate: {
+        type: String,
+    },
+    idNumber: {
+        type: String,
+    },
+    phoneNumber: {
+        type: String,
+    },
+    address: {
+        type: String,
+    },
+    plate: {
+        type: String,
+    },
+    documentNumber: {
+        type: String,
     },
     createdAt: Date,
     updatedAt: Date,
