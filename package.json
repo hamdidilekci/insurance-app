@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/madilekci/insurance-app/issues"
   },
-  "homepage": "https://github.com/madilekci/insurance-app#readme"
+  "homepage": "https://github.com/madilekci/insurance-app#readme",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
 }
