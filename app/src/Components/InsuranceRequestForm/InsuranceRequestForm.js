@@ -3,6 +3,7 @@ import { useState } from 'react'
 import axios from "axios";
 
 import FormInput from './FormInput.js'
+import postRequest from '../../Helpers/post-request.js';
 
 const initialInputValues = [
     [
@@ -77,11 +78,20 @@ export default function MyForm() {
         plate: '',
         documentNumber: '',
     });
+    // const [isLoading, setIsLoading] = useState(false);
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault();
-        console.log('button clicked');
-        console.log(formData);
+        const insuranceRequestParams = {
+            path: '/insurance-request',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: formData,
+        }
+        const response = await postRequest(insuranceRequestParams);
+        console.log(response)
     }
 
     const handleInputChange = (e) => {

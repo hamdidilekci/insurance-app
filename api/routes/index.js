@@ -5,11 +5,12 @@ import InsuranceRequestService from '../services/insurance-request.service.js'
 const router = express.Router();
 
 /* GET home page. */
-router.get('/', async(req, res) => {
+router.post('/insurance-request', async(req, res) => {
   try {
       let profiles = {
         name: 'Hello',
-        lastName: 'World'
+        lastName: 'World',
+        body: req.body
       };
       res.send(profiles);
   }
